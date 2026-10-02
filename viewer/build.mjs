@@ -32,7 +32,7 @@ async function moduleGraph(file){
     else if(spec.startsWith('three/addons/'))target=resolve(root,'vendor/addons',spec.slice(13));
     else if(spec.startsWith('.'))target=resolve(dirname(path),spec);
     else throw new Error('Unresolved dependency: '+spec);
-    if(!target.startsWith(root+'/'))throw new Error('Dependency escapes the site');
+    if(!target.replaceAll('\\','/').startsWith(root.replaceAll('\\','/')+'/'))throw new Error('Dependency escapes the site');
     await moduleGraph(relative(root,target));
   }
   if(file.startsWith('vendor/')){await mkdir(dirname(resolve(dist,file)),{recursive:true});await cp(path,resolve(dist,file));}
