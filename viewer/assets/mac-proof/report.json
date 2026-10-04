@@ -1,0 +1,112 @@
+{
+  "schema": "sih3d.mac-run.v1",
+  "input": {
+    "name": "mac-smoke-input",
+    "duration_s": null,
+    "source_frames": 4,
+    "input_type": "image_sequence"
+  },
+  "model": "facebook/map-anything-apache",
+  "model_revision": "00f9c245bbcb60522d1ed7f9e9d88462c6e3f38a",
+  "model_code_revision": "3d10cf7a3016fc0f9bb13a071ee66c47b10be0d9",
+  "torch_version": "2.14.0",
+  "inference_resolution": 350,
+  "window_size": 4,
+  "overlap": 2,
+  "keyframes": 4,
+  "windows": 1,
+  "points": 186197,
+  "vertices": 52282,
+  "triangles": 98145,
+  "runtime_s": 25.966184958000667,
+  "load_and_input_s": 22.82026875000156,
+  "ground_truth_used": false,
+  "training_performed": false,
+  "coordinate_system": "Local Z-up / learned metric scale; north unknown",
+  "georeferenced": false,
+  "utm_origin": null,
+  "gps_fit_residual": null,
+  "trajectory_rmse_m": null,
+  "surface_rmse_m": null,
+  "sih_requirements_verified": false,
+  "alignment": [],
+  "warnings": [
+    "Experimental reconstruction: no independent surface or trajectory accuracy measured.",
+    "Sparse keyframe sampling may miss visible surfaces. Unobserved surfaces are left empty.",
+    "No semantic segmentation, inertial fusion, bundle adjustment or Gaussian-splat training in this processing mode.",
+    "Camera intrinsics were estimated by the model; no measured calibration was supplied."
+  ],
+  "artifacts": [
+    "reconstruction_mesh.glb",
+    "pointcloud.ply",
+    "reconstruction.obj",
+    "camera_poses.npz",
+    "trajectory.csv",
+    "report.json"
+  ],
+  "frames": [
+    {
+      "index": 0,
+      "source_frame": null,
+      "timestamp_s": null
+    },
+    {
+      "index": 1,
+      "source_frame": null,
+      "timestamp_s": null
+    },
+    {
+      "index": 2,
+      "source_frame": null,
+      "timestamp_s": null
+    },
+    {
+      "index": 3,
+      "source_frame": null,
+      "timestamp_s": null
+    }
+  ],
+  "trajectory": [
+    {
+      "frame": 0,
+      "position": [
+        -0.028297647833824158,
+        0.02478000707924366,
+        0.004229079466313124
+      ]
+    },
+    {
+      "frame": 1,
+      "position": [
+        2.101670503616333,
+        1.0131018161773682,
+        0.18139547109603882
+      ]
+    },
+    {
+      "frame": 2,
+      "position": [
+        7.555819511413574,
+        -1.388893961906433,
+        -0.04042341932654381
+      ]
+    },
+    {
+      "frame": 3,
+      "position": [
+        12.231908798217773,
+        0.09286893159151077,
+        -0.06596425175666809
+      ]
+    }
+  ],
+  "checksums": {
+    "reconstruction_mesh.glb": "d81db5b40ab2e19d89ac321aadbfcbe679a2af284e87cfb70270eab23de31012",
+    "pointcloud.ply": "5640520aacf84923ada97a6ae1f6bc85dd88c58673cbc80435889ddb750d96e6",
+    "reconstruction.obj": "73dd085a6c32f115c8d8023e16055c397cb957af5b507c4c6355ab78b5f601db",
+    "camera_poses.npz": "9d3a528965a1960b24b944011d013721a0174d6f25f0accd8ae55bc89d5a87ec",
+    "trajectory.csv": "7f953001fd5542e12e68aa7f1745f2a6d6ce27a2209b3e4033e18d9e47b08e5e"
+  },
+  "calibration_used": false,
+  "appearance": "Embedded atlas sampled from actual input pixels; no generated textures or GANs"
+}

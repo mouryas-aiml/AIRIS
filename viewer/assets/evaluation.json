@@ -1,0 +1,35 @@
+{
+  "evaluation_only": true,
+  "construction_uses_ground_truth": false,
+  "image_id_offset": 61201,
+  "frames": 180,
+  "absolute_georeferencing_error": {
+    "rmse_m": 8.79743125425811,
+    "median_m": 7.807316872861644,
+    "p95_m": 11.931113172028848,
+    "max_m": 12.10223472547566
+  },
+  "trajectory_shape_error_after_global_sim3": {
+    "rmse_m": 0.8099183951066089,
+    "median_m": 0.58021043416692,
+    "p95_m": 1.2575455348422215,
+    "max_m": 2.940665489821652
+  },
+  "segment_length_error": {
+    "segments": 179,
+    "median_percent": 14.339056976424871,
+    "p95_percent": 49.226884376047316
+  },
+  "raw_gps_absolute_error": {
+    "rmse_m": 9.158829795605214,
+    "median_m": 7.55947356194079,
+    "p95_m": 13.616785152405432,
+    "max_m": 14.022365719419826
+  },
+  "raw_gps_shape_limit_after_global_sim3": {
+    "rmse_m": 2.3694581254723173,
+    "median_m": 2.084291849985865,
+    "p95_m": 3.8958980679200748,
+    "max_m": 6.977855400309574
+  }
+}

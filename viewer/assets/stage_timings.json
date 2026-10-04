@@ -1,0 +1,23 @@
+{
+  "01_prepare_input": 0.49980439899809426,
+  "02_extract_keyframes": 19.111962359995232,
+  "03_make_windows": 0.050029240002913866,
+  "04_adapt_telemetry": 0.15921811600128422,
+  "05_normalize_calibration": 0.04353142000036314,
+  "06_mast3r_slam": 33.572555749997264,
+  "07_convert_mast3r": 0.08948660500027472,
+  "08_mapanything_00_w000": 45.294839932998,
+  "08_mapanything_01_w054": 44.79543728200224,
+  "08_mapanything_02_w108": 44.63722380400577,
+  "09_pose_and_geometry_fusion": 2.1330605280018062,
+  "10_submission_assets": 18.283022292998794,
+  "11_photoreal_export_00_w000": 0.8749142430024222,
+  "11_photoreal_prepare_00_w000": 0.1862088859998039,
+  "11_photoreal_train_00_w000": 37.28252741599863,
+  "11_photoreal_export_01_w054": 0.8629061329993419,
+  "11_photoreal_prepare_01_w054": 4.574488090001978,
+  "11_photoreal_train_01_w054": 37.74710261700238,
+  "11_photoreal_export_02_w108": 0.8725427280005533,
+  "11_photoreal_prepare_02_w108": 4.586696024001867,
+  "11_photoreal_train_02_w108": 38.27714874799858
+}

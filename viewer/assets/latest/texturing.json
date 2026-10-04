@@ -1,0 +1,24 @@
+{
+  "schema": "voxelflight.source-texturing.v1",
+  "input": "sfm-anchored90-tsdf-20260910",
+  "prediction_source": "sfm-anchored90-420-20260910",
+  "method": "Depth-tested camera selection and source-image atlas projection",
+  "ground_truth_used": false,
+  "generated_textures": false,
+  "geometry_modified": false,
+  "triangles": 646019,
+  "source_textured_triangles": 588225,
+  "vertex_color_fallback_triangles": 57794,
+  "source_cameras_used": 90,
+  "atlas_size": [
+    7680,
+    3888
+  ],
+  "runtime_s": 5.132419458008371,
+  "source_mesh_sha256": "d56ecdd3cd7b8ee7fc43dbab91da93829d736bf8c492cc2aa680408e19de1553",
+  "sha256": "a0ed478e1e13b90d1f2b335fe3d41720da823a92f6e4e97c7cfe929a18b617b7",
+  "warnings": [
+    "View selection can produce texture seams; this is not independent geometry validation.",
+    "No holes, roofs or unseen surfaces were invented. Mesh accuracy remains unverified."
+  ]
+}

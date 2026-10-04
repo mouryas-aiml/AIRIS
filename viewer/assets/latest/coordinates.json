@@ -1,0 +1,13 @@
+{
+  "horizontal_crs": "EPSG:32632",
+  "local_origin": [
+    465590.8073957827,
+    5248023.322453712,
+    468.318
+  ],
+  "local_models": "GLB, surface PLY/OBJ, observed PLY and camera NPZ use projected metres relative to local_origin.",
+  "absolute_models": "LAS, GeoTIFF and trajectory CSV contain absolute projected coordinates.",
+  "local_appearance_model": "VoxelFlight_Local_Textured.glb is in the pre-GPS visual frame; use its source run for camera poses.",
+  "vertical_datum": "Onboard GPS altitude; dataset documents MSL; not independently surveyed",
+  "provisional": true
+}

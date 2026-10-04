@@ -1,0 +1,28 @@
+{
+  "construction_uses_ground_truth": false,
+  "source": "/mnt/road/sih3d/outputs/e2e_delivery_v3/fused/reconstruction_relative.ply",
+  "coordinate_reference_system": "EPSG:32632",
+  "clean_point_count": 518786,
+  "mesh_vertices": 224316,
+  "mesh_triangles": 450000,
+  "local_extent_m": [
+    43.55094051361084,
+    88.89764404296875,
+    42.89177894592285
+  ],
+  "dsm": {
+    "resolution_m": 0.25,
+    "width": 179,
+    "height": 363,
+    "valid_cells": 12237
+  },
+  "exports": {
+    "point_cloud": "reconstruction_clean.ply",
+    "las": "reconstruction_utm.las",
+    "mesh_ply": "reconstruction_mesh.ply",
+    "mesh_obj": "reconstruction_mesh.obj",
+    "mesh_glb": "reconstruction_mesh.glb",
+    "geotiff": "surface_model.tif"
+  },
+  "runtime_seconds": 16.03532761500537
+}

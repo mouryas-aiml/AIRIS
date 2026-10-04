@@ -56,4 +56,10 @@ if(!firebaseTarget){
   await build({configFile:resolve(root,'vite.config.js')});
   await stat(resolve(root,'dist/server/index.js'));
   await stat(resolve(root,'dist/.openai/hosting.json'));
+  for(const item of await readdir(dist)){
+    if(item==='server'||item==='.openai'||item==='client')continue;
+    await cp(resolve(dist,item),resolve(outputRoot,item),{recursive:true});
+  }
+  await cp(dist,resolve(root,'client'),{recursive:true});
 }
+

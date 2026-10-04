@@ -1,0 +1,66 @@
+{
+  "id": "zurich-urban-01",
+  "name": "Zurich urban corridor",
+  "dataset": "Zurich Urban MAV",
+  "recorded_at": "2026-09-01",
+  "input_duration_s": 60,
+  "keyframes": 180,
+  "thumbnail_frames": [
+    0,
+    10,
+    20,
+    30,
+    40,
+    50,
+    60,
+    70,
+    80,
+    90,
+    100,
+    110,
+    120,
+    130,
+    140,
+    150,
+    160,
+    170,
+    179
+  ],
+  "units": "metres",
+  "coordinates": "Local ENU",
+  "crs": "EPSG:32632",
+  "utm_origin": [
+    465580.27228352905,
+    5248057.55542658,
+    462.58337452201266
+  ],
+  "inference_available": false,
+  "geometry_status": "Partial reconstruction",
+  "source_url": "https://rpg.ifi.uzh.ch/zurichmavdataset.html",
+  "windows": [
+    {
+      "id": "w000",
+      "name": "West facade",
+      "range": [
+        0,
+        71
+      ]
+    },
+    {
+      "id": "w054",
+      "name": "Central facade",
+      "range": [
+        54,
+        125
+      ]
+    },
+    {
+      "id": "w108",
+      "name": "East facade",
+      "range": [
+        108,
+        179
+      ]
+    }
+  ]
+}

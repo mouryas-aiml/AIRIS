@@ -1,0 +1,47 @@
+{
+  "schema": "voxelflight.gps-transform.v1",
+  "scale": 1.1565891508118444,
+  "rotation": [
+    [
+      0.21283549404053778,
+      0.012267702730913758,
+      0.9770110316399852
+    ],
+    [
+      -0.969254207918674,
+      -0.12371483795695223,
+      0.21269912858596637
+    ],
+    [
+      0.12348009114211231,
+      -0.9922419777146058,
+      -0.014440386163279176
+    ]
+  ],
+  "translation": [
+    -10.094778453880728,
+    34.6686368117162,
+    -5.846807519729857
+  ],
+  "utm_origin": [
+    465590.8073957827,
+    5248023.322453712,
+    468.318
+  ],
+  "horizontal_crs": "EPSG:32632",
+  "vertical_datum": "Onboard GPS altitude; dataset documents MSL; not independently surveyed",
+  "ground_truth_used": false,
+  "construction_inputs": {
+    "runs-mac/sfm-anchored90-420-20260910/report.json": "b8d7755dfbb17cc527a9fa2daca7c806e0616c538d93f6b8100178f3599a20c6",
+    "runs-mac/sfm-anchored90-420-20260910/camera_poses.npz": "77eedcf0cb016358d20ec6b0548ca8c5b6dc3dcc5ccfa50b28a56c444c7fda8d",
+    "data/zurich-recovered-61201-63000/frame_telemetry.csv": "620c03aeeb6ae008b7b48532223bc912d38ce55d58e1cbc94f97e63b360c2340"
+  },
+  "gps_fit": {
+    "fit_rmse_m": 2.481528476252359,
+    "max_residual_m": 6.297377104808448,
+    "median_eph_m": 9.821500301499999,
+    "lateral_spread_ratio": 0.10207437880844675,
+    "correspondence_count": 90,
+    "independent_accuracy": false
+  }
+}

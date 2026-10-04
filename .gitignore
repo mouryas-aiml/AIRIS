@@ -13,7 +13,7 @@ deliverables/
 *.log
 __pycache__/
 .pytest_cache/
-viewer/assets/
 viewer/dist*/
+viewer/client/
 viewer/.firebase/
 viewer/firebase/config.local.json
