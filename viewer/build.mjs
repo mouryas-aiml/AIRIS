@@ -2,8 +2,13 @@ import {cp,mkdir,readFile,readdir,stat,writeFile,rm} from 'node:fs/promises';
 import {resolve,relative,dirname} from 'node:path';
 import {createHash} from 'node:crypto';
 import {execFileSync} from 'node:child_process';
+import {existsSync} from 'node:fs';
 import {build} from 'vite';
 const root=import.meta.dirname,firebaseTarget=process.argv.includes('--firebase');
+if(!existsSync(resolve(root,'assets'))||!existsSync(resolve(root,'vendor'))){
+  console.log('Public demo assets or vendor modules missing. Restoring from verified lockfile...');
+  execFileSync(process.execPath,[resolve(root,'scripts/fetch-demo-assets.mjs')],{stdio:'inherit'});
+}
 const outputRoot=resolve(root,firebaseTarget?'dist-firebase':'dist'),dist=firebaseTarget?outputRoot:resolve(outputRoot,'client');
 const sources=['index.html','styles.css','fonts.css','favicon.svg','app.js','scene.js','core.js','ui.js','inputs.js','video-input.js','engine.html','engine.css','engine.js','engine-copy.js','login.html','account.html','logout.html','entrance.css','entrance.js','motion.css','pixel.css','pixel.js','navigation.js','studio.css','flight.css'];
 sources.push('session-bridge.js','experience.css','latest-run.js');

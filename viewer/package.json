@@ -5,8 +5,10 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "fetch-assets": "node scripts/fetch-demo-assets.mjs",
+    "prebuild": "node scripts/fetch-demo-assets.mjs",
     "build": "node build.mjs",
-    "build:firebase": "node build.mjs --firebase",
+    "build:firebase": "node scripts/fetch-demo-assets.mjs && node build.mjs --firebase",
     "deploy:firebase": "node firebase/deploy.mjs",
     "test": "node --test tests/*.test.mjs"
   },
