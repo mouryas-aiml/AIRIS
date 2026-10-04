@@ -17,7 +17,7 @@
 #video-view[hidden]{display:none}.video-title{margin:0 auto 16px;width:100%;max-width:1050px}.video-title .eyebrow{color:#98daca}.video-title h2{font:600 clamp(23px,2.2vw,34px)/1.15 sans-serif;letter-spacing:-.7px;margin:9px 0}.video-title p{color:#9eafc8;font-size:14px;margin:0}
 .video-player{flex:1;min-height:130px;display:flex;align-items:center;justify-content:center;width:100%;max-width:1050px;margin:auto;background:#04080e;border:1px solid #314158;border-radius:12px;overflow:hidden;box-shadow:0 16px 50px #0004}
 #flight-video{display:block;width:100%;height:100%;max-height:58vh;object-fit:contain;aspect-ratio:16/9}.video-caption{width:100%;max-width:1050px;margin:14px auto 0;display:flex;align-items:center;justify-content:space-between;gap:16px}.video-caption p{font-size:12px;color:#97abc5}.video-caption .button{font-size:13px;border-radius:7px}
-.flight-studio[data-mode=video] .timeline{display:none}.flight-studio[data-mode=video] #reset-view,.flight-studio[data-mode=video] #snapshot{display:none}
+.flight-studio[data-mode=video] #reset-view,.flight-studio[data-mode=video] #snapshot{opacity:.7}
 .flight-studio .button{border-radius:6px}.flight-studio .main-nav button,.flight-studio .main-nav a{font-size:14px}.flight-studio .topbar{min-height:76px}.flight-studio .top-actions .button{font-size:13px}
 .flight-studio .timeline{height:139px;min-height:139px}.flight-studio .report-block{border-radius:12px;background:#101c2b}.flight-studio .report-metric{border-radius:10px}.flight-studio .page-heading h1{letter-spacing:-1px}
 @media(min-width:1600px){#video-view{padding-top:32px}.video-title{margin-bottom:22px}}

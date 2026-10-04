@@ -93,7 +93,7 @@ export class SceneViewer {
       }
       distance+=maxSpan*.04;
       this.camera.position.copy(center).addScaledVector(direction,distance);
-    }else if(preset==='plan'){this.camera.position.copy(center).add(new THREE.Vector3(0,-.001,maxSpan*1.32));}
+    }else if(preset==='plan'||preset==='nadir'){this.camera.position.copy(center).add(new THREE.Vector3(0,-.001,maxSpan*1.32));}
     else{const distance=Math.max(size.z,size.y*.85,size.x/Math.max(this.camera.aspect,.4))*1.35;this.camera.position.copy(center).add(new THREE.Vector3(distance*.7,-distance*.65,distance*.55));}
     this.camera.near=Math.max(maxSpan/5000,.005);this.camera.far=Math.max(maxSpan*35,100);
     this.camera.updateProjectionMatrix();this.controls.target.copy(center);this.controls.update();this.render();
@@ -115,7 +115,50 @@ export class SceneViewer {
     if(layer==='path')this.pathGroup.visible=visible&&!this.isImported;
     if(layer==='grid')this.grid.visible=visible;
     if(layer==='wire')this.object?.traverse(c=>{if(c.isMesh)c.material.wireframe=visible;});
+    if(layer==='textures'){
+      this.object?.traverse(c=>{
+        if(c.isMesh&&c.material){
+          if(c._originalMap===undefined)c._originalMap=c.material.map;
+          c.material.map=visible?(c._originalMap||null):null;
+          c.material.needsUpdate=true;
+        }
+      });
+    }
+    if(layer==='buildings'||layer==='terrain'||layer==='vegetation'){
+      this.setClassificationLayer(layer,visible);
+    }
     this.render();
+  }
+  setClassificationLayer(layer,visible){
+    if(!this.object)return;
+    this.object.traverse(c=>{
+      if(c.isMesh&&c.geometry){
+        const pos=c.geometry.getAttribute('position');
+        if(!pos)return;
+        if(!c._classifiedColorAttr){
+          const count=pos.count,colors=new Float32Array(count*3);
+          const zBox=this.box??new THREE.Box3().setFromObject(c);
+          const minZ=zBox.min.z,maxZ=zBox.max.z,rangeZ=Math.max(maxZ-minZ,1);
+          for(let i=0;i<count;i++){
+            const z=pos.getZ(i),normZ=(z-minZ)/rangeZ;
+            if(normZ<0.25){colors[i*3]=0.14;colors[i*3+1]=0.42;colors[i*3+2]=0.45;}
+            else if(normZ<0.45){colors[i*3]=0.18;colors[i*3+1]=0.68;colors[i*3+2]=0.42;}
+            else{colors[i*3]=0.95;colors[i*3+1]=0.74;colors[i*3+2]=0.32;}
+          }
+          c._classifiedColorAttr=new THREE.BufferAttribute(colors,3);
+          c._originalColorAttr=c.geometry.getAttribute('color')||null;
+        }
+        if(!visible&&c._classifiedActive===layer){
+          if(c._originalColorAttr)c.geometry.setAttribute('color',c._originalColorAttr);
+          else c.geometry.deleteAttribute('color');
+          c._classifiedActive=null;
+        }else if(visible){
+          c.geometry.setAttribute('color',c._classifiedColorAttr);
+          c._classifiedActive=layer;
+        }
+        if(c.material){c.material.vertexColors=!!c.geometry.getAttribute('color');c.material.needsUpdate=true;}
+      }
+    });
   }
   setPointSize(value){const size=Number(value)*.015;if(this.cloud)this.cloud.material.size=size;if(this.object?.isPoints)this.object.material.size=size;this.render();}
   hit(e){

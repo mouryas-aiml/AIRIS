@@ -1,10 +1,17 @@
-import {parseTrajectory,formatTime,escapeHTML} from './core.js';
+import {parseTrajectory,parseCSV,formatTime,escapeHTML} from './core.js';
 import {$} from './ui.js';
 const base='assets/latest/';
 async function asset(name,json=true){const response=await fetch(base+name);if(!response.ok)throw new Error(`Saved evidence unavailable (${response.status})`);return json?response.json():response.text();}
 export async function loadLatestRun(photos=[]){
-  const [scene,evaluation,coverage,trajectory]=await Promise.all([asset('scene.json'),asset('evaluation.json'),asset('coverage.json'),asset('trajectory.csv',false)]);
-  return {scene,evaluation,coverage,trajectory:parseTrajectory(trajectory),photos};
+  const [scene,evaluation,coverage,trajectory,trajectoryUtm]=await Promise.all([
+    asset('scene.json'),
+    asset('evaluation.json'),
+    asset('coverage.json'),
+    asset('trajectory.csv',false),
+    asset('trajectory_utm.csv',false).catch(()=>'')
+  ]);
+  const utmRows=trajectoryUtm?parseCSV(trajectoryUtm):[];
+  return {scene,evaluation,coverage,trajectory:parseTrajectory(trajectory),trajectoryUtm:utmRows,photos};
 }
 export function populateLatestReports({scene,evaluation,photos}){
   const aligned=evaluation.sim3_aligned_trajectory_error,absolute=evaluation.absolute_trajectory_error;
@@ -12,6 +19,7 @@ export function populateLatestReports({scene,evaluation,photos}){
   $('#scene-subtitle').textContent='Single pass · 60 seconds · 90 selected views';
   $('#rmse').textContent=aligned.rmse_m.toFixed(3);$('#point-count').textContent=scene.point_count.toLocaleString();$('#triangle-count').textContent=scene.mesh_triangles.toLocaleString();
   $('#crs').textContent='Visual frame';$('#runtime').textContent=formatTime(stageTime);
+  const topTraj=$('#topbar-rmse');if(topTraj)topTraj.textContent=`${aligned.rmse_m.toFixed(3)} m [Sim3]`;
   $('#runtime').closest('.inspector-section').querySelector('.micro').textContent='Latest 90-view experiment. Sum of measured SfM, inference, fusion and texturing stages; not end-to-end latency.';
   $('#runtime').parentElement.querySelector('dt').textContent='Measured stages';
   $('#coordinates').textContent='LOCAL VISUAL FRAME · ESTIMATED METRES';

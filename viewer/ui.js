@@ -27,7 +27,20 @@ const paths={
  sliders:'M4 7h16 M4 17h16 M9 4v6 M16 14v6',
  chart:'M4 4v16h16 M8 15l4-5 4 2 4-7',
  info:'M12 16v-4 M12 8h.01 M22 12a10 10 0 1 1-20 0 10 10 0 0 1 20 0',
- close:'M6 6l12 12 M18 6 6 18'
+ close:'M6 6l12 12 M18 6 6 18',
+ layers:'M12 2 2 7l10 5 10-5-10-5Z M2 17l10 5 10-5 M2 12l10 5 10-5',
+ map:'m1 6 7-3 8 3 7-3v15l-7 3-8-3-7 3V6Z M8 3v15 M16 6v15',
+ radar:'M12 22A10 10 0 1 0 2 12 M12 18a6 6 0 1 0-6-6 M12 14a2 2 0 1 0-2-2 M12 2v10l7-7',
+ satellite:'m13 2 9 9-4 4-9-9 4-4Z M7 17l-4 4 M2 12a10 10 0 0 1 10-10 M6 18a6 6 0 0 1 6-6',
+ crosshair:'M12 2v4 M12 18v4 M2 12h4 M18 12h4 M12 16a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z',
+ drone:'M12 8v8 M8 12h8 M4 4h4v4H4z M16 4h4v4h-4z M4 16h4v4H4z M16 16h4v4h-4z',
+ check:'m5 13 4 4L19 7',
+ target:'M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20Z M12 18a6 6 0 1 0 0-12 6 6 0 0 0 0 12Z M12 14a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z',
+ terminal:'m4 17 6-6-6-6 M12 19h8',
+ keyboard:'M4 4h16v16H4z M8 8h.01 M12 8h.01 M16 8h.01 M8 12h.01 M12 12h.01 M16 12h.01 M8 16h8',
+ building:'M3 21h18 M5 21V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16 M9 7h1 M14 7h1 M9 11h1 M14 11h1 M9 15h1 M14 15h1',
+ terrain:'m2 20 7-10 5 7 3-4 5 7H2Z',
+ texture:'M3 3h18v18H3z M3 9h18 M3 15h18 M9 3v18 M15 3v18'
 };
 export function icon(name){return `<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="${paths[name]??paths.cube}"/></svg>`;}
 export function hydrateIcons(root=document){root.querySelectorAll('[data-icon]').forEach(el=>{el.innerHTML=icon(el.dataset.icon);});}
@@ -37,21 +50,43 @@ export function status(message){$('#status-text').textContent=message;}
 export function openDialog(id){const d=$(id);if(d&&!d.open)d.showModal();}
 export function setupDialogs(){document.querySelectorAll('.close-dialog').forEach(b=>b.addEventListener('click',()=>b.closest('dialog').close()));document.querySelectorAll('dialog').forEach(d=>d.addEventListener('click',e=>{if(e.target===d){const r=d.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)d.close();}}));}
 export function drawCoverage(coverage,trajectory,frame=0){
- const canvas=$('#coverage-map'),ctx=canvas.getContext('2d'),w=canvas.width,h=canvas.height,pad=22;
- ctx.clearRect(0,0,w,h);ctx.fillStyle='#0c161e';ctx.fillRect(0,0,w,h);
- ctx.strokeStyle='#20303c';ctx.lineWidth=.8;
- for(let x=0;x<w;x+=40){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,h);ctx.stroke();}
- for(let y=0;y<h;y+=40){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(w,y);ctx.stroke();}
+ const canvas=$('#coverage-map');if(!canvas)return;
+ const ctx=canvas.getContext('2d'),w=canvas.width,h=canvas.height,pad=24;
+ ctx.clearRect(0,0,w,h);ctx.fillStyle='#090e17';ctx.fillRect(0,0,w,h);
+ ctx.strokeStyle='#1b263b';ctx.lineWidth=.8;
+ for(let x=0;x<w;x+=35){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,h);ctx.stroke();}
+ for(let y=0;y<h;y+=35){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(w,y);ctx.stroke();}
  const [min,max]=coverage.bounds;
  const xs=trajectory.map(t=>t.position[0]),ys=trajectory.map(t=>t.position[1]);
  const bounds=[Math.min(min[0],...xs),Math.min(min[1],...ys),Math.max(max[0],...xs),Math.max(max[1],...ys)];
  const scale=Math.min((w-pad*2)/Math.max(bounds[2]-bounds[0],1),(h-pad*2)/Math.max(bounds[3]-bounds[1],1));
  const ox=(w-(bounds[2]-bounds[0])*scale)/2,oy=(h-(bounds[3]-bounds[1])*scale)/2;
  const project=(x,y)=>[ox+(x-bounds[0])*scale,h-oy-(y-bounds[1])*scale];
- for(const [x,y,count] of coverage.cells){const p=project(min[0]+x*coverage.resolution_m,min[1]+y*coverage.resolution_m);ctx.fillStyle=`rgba(139,211,181,${Math.min(.7,.12+Math.log1p(count)/10)})`;ctx.fillRect(p[0],p[1],Math.max(1,coverage.resolution_m*scale),Math.max(1,coverage.resolution_m*scale));}
- ctx.strokeStyle='#edca8b';ctx.lineWidth=1.5;ctx.beginPath();trajectory.forEach((t,i)=>{const p=project(...t.position);if(i===0)ctx.moveTo(...p);else ctx.lineTo(...p);});ctx.stroke();
- const p=project(...trajectory[Math.min(frame,trajectory.length-1)].position);ctx.fillStyle='#e6fff0';ctx.beginPath();ctx.arc(...p,3.8,0,Math.PI*2);ctx.fill();
- ctx.fillStyle='#829fab';ctx.font='12px sans-serif';ctx.fillText(coverage.frame?'Local XY':'N ↑',w-65,20);
+ for(const [x,y,count] of coverage.cells){
+   const p=project(min[0]+x*coverage.resolution_m,min[1]+y*coverage.resolution_m);
+   const alpha=Math.min(.85,.18+Math.log1p(count)/8);
+   ctx.fillStyle=`rgba(0,229,255,${alpha})`;
+   ctx.fillRect(p[0],p[1],Math.max(1.5,coverage.resolution_m*scale),Math.max(1.5,coverage.resolution_m*scale));
+ }
+ ctx.strokeStyle='#f59e0b';ctx.lineWidth=1.8;ctx.beginPath();
+ trajectory.forEach((t,i)=>{const p=project(...t.position);if(i===0)ctx.moveTo(...p);else ctx.lineTo(...p);});ctx.stroke();
+ trajectory.forEach((t,i)=>{
+   if(i%5===0){const p=project(...t.position);ctx.fillStyle='#fbbf24';ctx.beginPath();ctx.arc(...p,1.5,0,Math.PI*2);ctx.fill();}
+ });
+ const curIdx=Math.min(Math.max(frame,0),trajectory.length-1);
+ const p=project(...trajectory[curIdx].position);
+ ctx.strokeStyle='rgba(16,185,129,0.4)';ctx.lineWidth=1;ctx.beginPath();ctx.arc(...p,10,0,Math.PI*2);ctx.stroke();
+ ctx.fillStyle='#10b981';ctx.beginPath();ctx.arc(...p,4.2,0,Math.PI*2);ctx.fill();
+ ctx.fillStyle='#ffffff';ctx.beginPath();ctx.arc(...p,2,0,Math.PI*2);ctx.fill();
+ if(curIdx<trajectory.length-1){
+   const nextP=project(...trajectory[curIdx+1].position);
+   const angle=Math.atan2(nextP[1]-p[1],nextP[0]-p[0]);
+   ctx.strokeStyle='#10b981';ctx.lineWidth=1.5;ctx.beginPath();
+   ctx.moveTo(...p);ctx.lineTo(p[0]+Math.cos(angle)*14,p[1]+Math.sin(angle)*14);ctx.stroke();
+ }
+ ctx.fillStyle='rgba(6,11,18,0.85)';ctx.fillRect(w-70,8,62,22);
+ ctx.strokeStyle='#283f5e';ctx.lineWidth=1;ctx.strokeRect(w-70,8,62,22);
+ ctx.fillStyle='#00e5ff';ctx.font='bold 10px monospace';ctx.fillText(coverage.frame?'LOCAL XY':'UTM 32N',w-65,23);
 }
 export function populateReports({evaluation,assets,timings,photos}){
  const shape=evaluation.trajectory_shape_error_after_global_sim3;
