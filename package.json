@@ -5,7 +5,7 @@
   "type": "module",
   "description": "AIRIS: Aerial Intelligence for Reconstruction and Avian Surveillance",
   "scripts": {
-    "build": "npm --prefix viewer run build:firebase",
+    "build": "npm --prefix viewer run build",
     "test": "npm --prefix viewer test"
   }
 }

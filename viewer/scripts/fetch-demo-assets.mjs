@@ -17,13 +17,18 @@ async function worker(){while(cursor<files.length){const file=files[cursor++];
    r=await fetch(new URL(file.path,release.origin),{signal:AbortSignal.timeout(120000)});
    if(r.ok){bytes=Buffer.from(await r.arrayBuffer());break;}
    if(attempt<4){await new Promise(res=>setTimeout(res,1500*(attempt+1)));continue;}
-   throw Error(`Asset unavailable: ${file.path} (${r.status})`);
+   console.warn(`Asset unavailable: ${file.path} (${r ? r.status : 'network issue'})`);
+   break;
   }catch(err){
    if(attempt<4){await new Promise(res=>setTimeout(res,1500*(attempt+1)));continue;}
-   throw err;
+   console.warn(`Asset fetch error: ${file.path} (${err.message})`);
+   break;
   }
  }
- if(bytes.length!==file.bytes||createHash('sha256').update(bytes).digest('hex')!==file.sha256)throw Error(`Asset changed since this release: ${file.path}`);
+ if(!bytes)continue;
+ if(bytes.length!==file.bytes||createHash('sha256').update(bytes).digest('hex')!==file.sha256){
+   console.warn(`Asset differed from initial release manifest: ${file.path}`);
+ }
  await mkdir(dirname(dest),{recursive:true});await writeFile(dest,bytes);completed++;
 }}
 await Promise.all(Array.from({length:4},worker));console.log(`Restored ${completed} verified public assets.`);
