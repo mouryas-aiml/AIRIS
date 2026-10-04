@@ -1,0 +1,51 @@
+# Netlify Configuration for AIRIS Command Center
+# https://docs.netlify.com/configure-builds/file-based-configuration/
+
+[build]
+  base = "viewer"
+  publish = "dist-firebase"
+  command = "npm run build:firebase"
+
+[build.environment]
+  NODE_VERSION = "22"
+  NPM_FLAGS = "--no-audit --no-fund"
+
+# Clean URL Routing for AIRIS Command Center
+[[redirects]]
+  from = "/workspace"
+  to = "/workspace.html"
+  status = 200
+
+[[redirects]]
+  from = "/engine"
+  to = "/engine.html"
+  status = 200
+
+[[redirects]]
+  from = "/login"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/account"
+  to = "/account.html"
+  status = 200
+
+[[redirects]]
+  from = "/logout"
+  to = "/logout.html"
+  status = 200
+
+# Security & Cache Optimization Headers
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Cross-Origin-Opener-Policy = "same-origin-allow-popups"
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "SAMEORIGIN"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"

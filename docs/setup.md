@@ -31,7 +31,7 @@ The tested reconstruction machine uses Apple Silicon and Python 3.12. Its full p
 ```sh
 cd voxelflight
 python3.12 -m venv .venv-mac
-.venv-mac/bin/pip install -r requirements.txt
+.venv-mac/bin/pip install -r requirements-mac.txt
 .venv-mac/bin/python setup_mac.py
 .venv-mac/bin/python mac_reconstruct.py --help
 .venv-mac/bin/python -m pytest tests/test_mac_engine.py tests/test_public_engine.py tests/test_gps_georeference.py tests/test_refusion.py

@@ -66,4 +66,6 @@ export async function prepareFirebase(root,dist){
   await rm(resolve(dist,'_pages'),{recursive:true,force:true});
   await rm(resolve(dist,'entrance.js'),{force:true});
   await writeFile(resolve(dist,'404.html'),'<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>AIRIS — Page not found</title><link rel="stylesheet" href="/entrance.css"></head><body class="entrance"><main class="signin-panel"><span class="eyebrow">AIRIS</span><h1>This route is off the flight path.</h1><p>The page was not found. Your workspace is still here.</p><a class="provider primary" href="/workspace">Open the workspace →</a><a class="guest-button" href="/">Return to the entrance</a></main></body></html>');
+  await writeFile(resolve(dist,'_redirects'),'/workspace  /workspace.html  200\n/engine  /engine.html  200\n/login  /index.html  200\n/account  /account.html  200\n/logout  /logout.html  200\n');
 }
+

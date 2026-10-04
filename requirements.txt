@@ -1,5 +1,5 @@
-# Tested Apple Silicon reconstruction environment. See docs/setup.md before installing.
--r requirements-mac.lock.txt
--r requirements-refusion.txt
--r requirements-public.txt
--r requirements-test.txt
+# AIRIS Web Application (Netlify / Vercel / Cloudflare / Firebase)
+# The web frontend is located in /viewer and builds with Node.js 22.
+#
+# For offline workstation photogrammetry & ML model inference (Apple Silicon / CUDA):
+# see requirements-mac.txt, requirements-mac.lock.txt, or docs/setup.md
