@@ -2,7 +2,7 @@
   "auth": {
     "providers": {
       "googleSignIn": {
-        "oAuthBrandDisplayName": "VoxelFlight",
+        "oAuthBrandDisplayName": "AIRIS",
         "supportEmail": "suman.sharma.ug23@nsut.ac.in",
         "authorizedRedirectUris": [
           "https://voxelflight-3d.web.app/__/auth/handler",

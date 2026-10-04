@@ -99,7 +99,8 @@ $('#engine-mesh').addEventListener('change',e=>viewer?.setLayer('mesh',e.target.
 $('#engine-path').addEventListener('change',e=>viewer?.setLayer('path',e.target.checked));
 $('#engine-cloud').addEventListener('change',async e=>{e.target.disabled=true;try{await viewer?.toggleCloud(e.target.checked);}catch(error){e.target.checked=false;$('#engine-feedback').textContent=error.message;}finally{e.target.disabled=false;}});
 $('#engine-measure').addEventListener('click',()=>{if(!viewer)return;viewer.setMeasuring(!viewer.measuring);$('#engine-distance').textContent=viewer.measuring?'Select two surface points':'Scale unverified';});
-$('#engine-snapshot').addEventListener('click',()=>{if(!viewer)return;const a=document.createElement('a');a.href=viewer.snapshot();a.download='voxelflight-reconstruction.png';a.click();});
+$('#engine-snapshot').addEventListener('click',()=>{if(!viewer)return;const a=document.createElement('a');a.href=viewer.snapshot();a.download='airis-reconstruction.png';a.click();});
+window.addEventListener('airis:authchange',event=>{signedIn=event.detail.signedIn;if(!signedIn&&loadedJob&&loadedJob!=='mac-proof'){location.reload();return;}connect();});
 window.addEventListener('voxelflight:authchange',event=>{signedIn=event.detail.signedIn;if(!signedIn&&loadedJob&&loadedJob!=='mac-proof'){location.reload();return;}connect();});
 document.addEventListener('visibilitychange',()=>{if(!document.hidden)connect();});
 await connect();

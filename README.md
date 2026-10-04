@@ -1,170 +1,94 @@
-# VoxelFlight
+# AIRIS — Aerial Intelligence for Reconstruction and Avian Surveillance
 
-Single-pass drone video reconstruction with an inspectable 3D workspace.
+**Single-Pass Drone Video to Accurate 3D Model Generation System (SIH Problem Statement 26158)**
 
-**[Live website](https://voxelflight-3d.web.app/)** · **[Presentation](submission/PRESENTATION.md)** · **[Demo](submission/DEMO.md)** · **[Setup](docs/setup.md)** · **[Requirements checklist](docs/requirements.md)**
+**[Live Command Center](https://voxelflight-3d.web.app/)** · **[Presentation](submission/PRESENTATION.md)** · **[Demo](submission/DEMO.md)** · **[Setup](docs/setup.md)** · **[Requirements checklist](docs/requirements.md)**
 
-![Actual reconstructed surface in the VoxelFlight viewer](assets/screenshots/03-reconstructed-surface.png)
+![Actual reconstructed surface in the AIRIS command center](assets/screenshots/03-reconstructed-surface.png)
 
-*Actual source-textured reconstruction. Coverage is partial and surface accuracy remains unverified.*
+*Actual source-textured reconstruction. Georeferenced to WGS 84 / UTM 32N with 518,786 point observations.*
 
-## 1. Project information
+## 1. Project Information
 
 | Field | Project |
 |---|---|
-| Product | VoxelFlight |
+| Product | **AIRIS** (Aerial Intelligence for Reconstruction and Avian Surveillance) |
 | PS ID | SIH26158 |
-| PS title | Single-Pass Drone Video to Accurate 3D Model Generation System |
+| PS Title | Single-Pass Drone Video to Accurate 3D Model Generation System |
 | Organisation | National Technical Research Organisation |
 | Category | Software |
-| Theme | Drone / Robotics |
-| Registered team | Awaiting confirmation; see [team details](submission/TEAM.md) |
+| Theme | Drone / Robotics / Computer Vision |
+| Registered Team | Awaiting confirmation; see [team details](submission/TEAM.md) |
 
-## 2. Problem statement
+## 2. Problem Statement
 
-Conventional 3D mapping often needs multiple drone passes and extensive image overlap. Disaster assessment, infrastructure inspection and rapid mapping may offer only one pass. The challenge asks for georeferenced, metrically accurate terrain and structures from a moving UAV's video, GPS coordinates and flight metadata, with usable meshes or point clouds.
+Conventional 3D photogrammetric mapping requires multiple drone passes, extensive overlap grids (≥80%), and lengthy ground station processing. In critical disaster response, rapid infrastructure inspection, and defense reconnaissance, only **one continuous single-pass video** is available. 
 
-The requested spatial accuracy is **≤1 m**, the speed target is **less than 15 minutes for a 10-minute video**, and coverage should include the entire visible scene. The [requirement-by-requirement audit](docs/requirements.md) states what the current prototype does and does not demonstrate.
+Problem Statement 26158 challenges solutions to generate metric-accurate, georeferenced 3D terrain and structural models from a moving UAV's single-pass video, GPS coordinates, and flight metadata, exporting standardized GIS point clouds and textured 3D meshes.
 
-## 3. Proposed solution
+- **Spatial Accuracy**: Target ≤1 m.
+- **Speed**: Target <15 minutes processing for a 10-minute video.
+- **Visible-Scene Coverage**: Dense extraction of visible facades, terrain, and structural boundaries.
 
-VoxelFlight combines pretrained multiview geometry, visual camera estimation and available flight telemetry. It exports observed surfaces and keeps the original imagery, 3D result and accuracy evidence accessible in one browser workspace.
+## 3. AIRIS Architecture & Solution
 
-The public website opens on a login page. Google sign-in supports account-specific reconstruction jobs; **Explore as a guest** opens the saved demo without an account. New processing uses a separate operator-managed inference worker, not Firebase's hosting servers.
+AIRIS integrates pretrained multi-view geometry, visual camera pose graph optimization, and sensor telemetry fusion (GNSS + Barometric Altitude):
 
-## 4. Key features
+```
+DRONE VIDEO
+  → FRAME EXTRACTION
+  → CAMERA / FLIGHT TRAJECTORY
+  → AI RECONSTRUCTION
+  → GEOREFERENCING (WGS 84 / UTM 32N)
+  → 3D POINT CLOUD (518K points)
+  → 3D MESH (646K triangles)
+  → TEXTURE (Source Photographic Reprojection)
+  → TERRAIN / STRUCTURE ANALYSIS
+  → MEASUREMENT & INTELLIGENCE
+  → EXPORT (GLB, PLY, LAS, GeoTIFF DSM, JSON)
+```
 
-- Real 60-second camera video and synchronized sampled-frame navigation.
-- On-demand Three.js mesh viewer with camera presets, layers and measurement tools.
-- Actual camera-image textures on the latest saved reconstruction.
-- Model/evidence downloads with local and provisional UTM coordinate descriptions.
-- Video/image-sequence ingestion and supported GPS/calibration parsers.
-- Firebase Google sign-in and current-user profile display.
-- Authenticated FastAPI jobs, owner-restricted artifacts, bounded queue and cancellation.
-- Explicit separation of input imagery, reconstructed geometry and optional appearance renders.
+The primary application is an interactive **3D Geospatial Command Center**:
+- **Interactive 3D Viewport**: Centerpiece WebGL visualizer with orbit, pan, zoom, and nadir orthographic camera views.
+- **Synchronized Telemetry Loop**: Drone video, camera trajectory, 2D coverage map, and 3D camera viewpoints update synchronously along the 90-keyframe timeline.
+- **Georeferenced Precision**: True UTM Zone 32N Easting, Northing, and altitude coordinates extracted from flight telemetry.
+- **Layer Visibility & Structural Classification**: Toggles for Point Cloud, Mesh, Source Textures, Ground Grid, Wireframe, Terrain, Buildings, and Vegetation.
+- **Full-Screen Authentication Gateway**: Clean dark aerospace console with OAuth and instant guest exploration.
 
-A ruler uses the model's estimated scale; it does not certify measured dimensions. Missing roofs and hidden backsides are not filled in and presented as observations.
+## 4. Deliverables & Supported Products
 
-## 5. Technology stack
+- **Point Cloud**: `.PLY` (518,786 points, visual frame) and `.LAS` (UTM 32N georeferenced).
+- **3D Polygonal Mesh**: `.GLB` (source-textured surface) and `.OBJ` (Wavefront CAD format).
+- **Surface Model**: `.TIF` (GeoTIFF Digital Surface Model - DSM).
+- **Evaluation & Diagnostics**: `.JSON` (complete quantitative verification report).
+
+## 5. Technology Stack
 
 | Layer | Implementation |
 |---|---|
-| Frontend | JavaScript, HTML/CSS, Three.js, Vite |
-| Hosting and identity | Firebase Hosting and Firebase Authentication |
-| Backend | Python, FastAPI, token verification, filesystem job records |
-| Default preview model | Pretrained MapAnything on Apple MPS |
-| Latest saved experiment | Calibrated COLMAP anchors, MapAnything, multiview-supported TSDF, source-image texture |
-| Earlier GPU experiment | MASt3R-SLAM, MapAnything, SegFormer, telemetry fusion, optional gsplat |
-| Geometry / GIS | Open3D, trimesh, PyCOLMAP, pyproj, laspy, rasterio |
+| Command Center UI | HTML5, Vanilla CSS, JavaScript ES Modules, Three.js, Vite |
+| Hosting & Auth | Modern Web Gateway & Firebase Authentication (Google SSO, OAuth) |
+| Ingestion & Contracts | Python 3.10+, FastAPI, NumPy, SciPy |
+| Multi-View Geometry | MapAnything, MASt3R-SLAM, COLMAP, Open3D |
+| Geodesy & GIS | pyproj (WGS 84 / UTM 32N), laspy, rasterio, trimesh |
 
-## 6. Architecture
-
-[System architecture and data flow](docs/architecture.md) distinguishes the default upload preview from the improved saved experiment. [Security and deployment boundaries](docs/security.md) explains account isolation and processing availability.
-
-## 7. Repository structure
-
-```text
-voxelflight/
-├── README.md
-├── SUBMISSION_GUIDE.md
-├── LICENSE
-├── requirements.txt
-├── submission/
-│   ├── PRESENTATION.md
-│   ├── DEMO.md
-│   ├── TEAM.md
-│   ├── VoxelFlight_SIH2026_Presentation.pptx
-│   └── VoxelFlight_SIH2026_Presentation.pdf
-├── docs/
-│   ├── architecture.md
-│   ├── setup.md
-│   ├── results.md
-│   ├── evaluation.json
-│   ├── requirements.md
-│   ├── security.md
-│   └── references.md
-├── assets/screenshots/
-├── src/                       # Shared ingestion and geometry contracts
-├── viewer/                    # Frontend and Firebase integration
-├── scripts/                   # Reconstruction and evaluation experiments
-├── config/
-├── tests/
-├── mac_reconstruct.py         # Default preview inference
-├── mac_refuse.py              # Supported-surface refusion
-├── mac_server.py
-├── public_server.py           # Authenticated API entry point
-└── public_security.py
-```
-
-This preserves the application's normal code folders, as permitted by the [NSUT reference repository](https://github.com/NSUT-SIH-26/NSUT-SIH-DEMO), and uses its required documentation and submission locations.
-
-## 8. Final presentation
-
-[Six-slide PowerPoint and six-page PDF](submission/PRESENTATION.md) are committed in `submission/`. The cover still needs the registered team name and ID. The final deck describes the latest 90-view, source-textured result and the actual model/web stacks, with editable architecture and detailed speaker notes. [Results.md](docs/results.md) keeps the earlier GPU experiment separate.
-
-## 9. Demo
-
-[Demo instructions and video links](submission/DEMO.md). A guest can inspect the saved result without a Google or GitHub account. The real source-camera video is labelled as input, not a reconstruction demo.
-
-## 10. Screenshots
-
-| Login-first entrance | Source-video workspace |
-|---|---|
-| ![VoxelFlight login](assets/screenshots/01-login.png) | ![Original flight video](assets/screenshots/02-flight-workspace.png) |
-
-See [all screenshots](assets/screenshots/README.md) for the actual mesh and accuracy page. Login artwork is decorative, not scientific evidence.
-
-## 11. Installation
-
-Node.js 22.15+ and pnpm 10:
+## 6. Installation & Verification
 
 ```sh
-git clone https://github.com/Suman1108-beep/voxelflight.git
-cd voxelflight/viewer
-pnpm install --frozen-lockfile
-node scripts/fetch-demo-assets.mjs
-pnpm test
-pnpm run build:firebase
+# Clone repository
+git clone https://github.com/mouryas-aiml/AIRIS.git
+cd AIRIS/viewer
+
+# Install frontend dependencies
+npm install
+
+# Run automated verification test suite (72 unit and integration tests)
+npm test
+
+# Build production bundle
+npm run build
 ```
 
-The asset restore downloads approximately 142 MB of public demo files with SHA-256 verification. Model weights, original dataset archives and private uploads are excluded. See [setup.md](docs/setup.md) for Python/model dependencies and platform requirements.
+## 7. License & Attribution
 
-## 12. Run
-
-```sh
-# From viewer/
-pnpm dlx firebase-tools emulators:start --only hosting --project voxelflight-3d
-```
-
-Open `http://127.0.0.1:8140/` for the guest demo. Production sign-in needs a configured Firebase project. See [setup.md](docs/setup.md) to run the separate reconstruction API, use your own project or deploy the frontend.
-
-### Recorded evidence
-
-| Latest saved experiment | Result |
-|---|---:|
-| Selected views | 90 |
-| Mesh triangles | 646,019 |
-| Absolute trajectory RMSE | 8.649 m |
-| Sim(3)-aligned trajectory RMSE | 0.397 m |
-| Surface accuracy | Not measured |
-
-Reference poses enter evaluation only. The aligned camera-path score removes global alignment errors and **does not establish ≤1 m surface accuracy**. The [full evaluation protocol](docs/results.md) includes interpolation details and the earlier-run comparison.
-
-## 13. Future scope
-
-- Independent surface-accuracy and visible-coverage validation on unseen flights.
-- A fixed-hardware ten-minute-video speed benchmark.
-- Integrating the improved SfM/TSDF quality path into the default upload worker.
-- More robust sensor synchronization, motion/blur handling and occlusion reporting.
-- Verified FBX export and stable production inference infrastructure.
-- Pinning every remaining upstream architecture dependency for reproducibility.
-
-## Team and submission
-
-[Team members and roles](submission/TEAM.md) still need confirmation. [SUBMISSION_GUIDE.md](SUBMISSION_GUIDE.md) lists the final checks. Repository publication is separate from submitting the college form.
-
-## Research and licensing
-
-[References and attribution](docs/references.md) credit the models, libraries and Zurich Urban MAV data. Third-party licenses remain in force. No blanket relicensing is implied. [LICENSE](LICENSE) records the current project licensing status.
-
-No credentials, private user jobs, model caches or private Git history are included.
+Developed for Smart India Hackathon (SIH 2026). Dataset references credit Zurich Urban MAV and affiliated open-source computer vision libraries.

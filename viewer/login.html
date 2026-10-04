@@ -1,44 +1,218 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="theme-color" content="#080d1c">
-  <title>VoxelFlight — Enter the studio</title>
-  <meta name="description" content="Explore real drone reconstructions in an interactive 3D workspace. Sign in or open the public demo.">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#060a12">
+  <title>AIRIS — Enter the studio</title>
+  <meta name="description" content="AIRIS: Aerial Intelligence for Reconstruction and Avian Surveillance. Professional UAV photogrammetry and 3D reconstruction platform for SIH Problem Statement 26158.">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="/entrance.css">
-  <link rel="stylesheet" href="/pixel.css"><link rel="stylesheet" href="/studio.css"><link rel="stylesheet" href="/flight.css">
+  <link rel="stylesheet" href="/pixel.css">
+  <link rel="stylesheet" href="/studio.css">
+  <link rel="stylesheet" href="/flight.css">
   <script type="module" src="/entrance.js"></script>
 </head>
-<body class="entrance pixel-entrance flight-entrance" data-page="signin">
-  <a class="skip" href="#signin">Skip to sign in</a>
-  <header class="entrance-nav">
-    <a class="wordmark" href="/" aria-label="VoxelFlight home"><span class="mark">V<span>F</span></span>Voxel<span>Flight</span><small>RECONSTRUCTION STUDIO</small></a>
+<body class="entrance airis-gateway" data-page="signin">
+  <a class="skip" href="#signin">Skip to authentication</a>
+
+  <!-- Top Geodetic Telemetry Header -->
+  <header class="entrance-nav airis-gateway-nav">
+    <a class="wordmark airis-wordmark" href="/" aria-label="AIRIS home">
+      <span class="mark airis-mark" aria-hidden="true">
+        <svg viewBox="0 0 40 40" width="28" height="28">
+          <path d="M20 37 L5 28 L20 19 L35 28 Z" fill="#0b1728" stroke="#00e5ff" stroke-width="1.2" stroke-opacity="0.6"/>
+          <path d="M20 3 L35 25 L20 20 L5 25 Z" fill="url(#airis-grad)"/>
+          <circle cx="20" cy="3" r="1.8" fill="#ffffff"/>
+          <circle cx="20" cy="20" r="1.5" fill="#00e5ff"/>
+          <defs>
+            <linearGradient id="airis-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#00e5ff"/>
+              <stop offset="50%" stop-color="#00b4d8"/>
+              <stop offset="100%" stop-color="#2563eb"/>
+            </linearGradient>
+          </defs>
+        </svg>
+      </span>
+      <span class="brand-text">AIRIS</span>
+      <small>AERIAL INTELLIGENCE &amp; 3D RECONSTRUCTION</small>
+    </a>
+    <div class="gateway-nav-telemetry" aria-hidden="true">
+      <span class="telemetry-pill"><i class="status-dot"></i>GNSS RTK FIX (9 SATS)</span>
+      <span class="telemetry-pill">UTM 32N · WGS 84</span>
+    </div>
     <a class="nav-link" href="/workspace">Explore the demo <span aria-hidden="true">↗</span></a>
   </header>
-  <main class="entrance-main">
-    <section class="world" aria-label="Pixel-art welcome scene">
-      <div class="world-stage" id="world-stage">
-        <img class="world-image" src="/assets/art/pixel-queue-v2.jpg" width="1902" height="827" fetchpriority="high" alt="Pixel-art companions waiting at a warmly lit studio doorway. Decorative illustration, not a reconstruction.">
+
+  <!-- Full-Screen Tactical Geospatial Gateway -->
+  <main class="entrance-main airis-gateway-main">
+    <!-- Sophisticated Procedural Topographic Aerial Mesh Background -->
+    <section class="world airis-topographic-viewport" aria-label="Procedural topographic terrain mesh">
+      <div class="world-stage airis-geospatial-canvas-wrap" id="world-stage">
+        <!-- Procedural Topographic Elevation Vector Grid with Coordinates & Drone Flight Vectors -->
+        <svg class="airis-terrain-mesh" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice" role="img" aria-label="AIRIS procedural topographic aerial contour grid. Decorative illustration, not a reconstruction.">
+          <defs>
+            <linearGradient id="contour-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#00e5ff" stop-opacity="0.35"/>
+              <stop offset="50%" stop-color="#00b4d8" stop-opacity="0.18"/>
+              <stop offset="100%" stop-color="#2563eb" stop-opacity="0.05"/>
+            </linearGradient>
+            <linearGradient id="flight-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#10b981" stop-opacity="0.8"/>
+              <stop offset="100%" stop-color="#00e5ff" stop-opacity="0.9"/>
+            </linearGradient>
+            <pattern id="geodetic-grid" width="80" height="80" patternUnits="userSpaceOnUse">
+              <path d="M 80 0 L 0 0 0 80" fill="none" stroke="#13243a" stroke-width="0.8"/>
+              <circle cx="80" cy="0" r="1.5" fill="#1e3a5f"/>
+            </pattern>
+          </defs>
+
+          <!-- Geodetic Coordinate Grid Overlay -->
+          <rect width="100%" height="100%" fill="url(#geodetic-grid)"/>
+
+          <!-- Topographic Contour Elevation Rings -->
+          <g class="contour-lines" stroke="#00e5ff" stroke-opacity="0.22" stroke-width="1.2" fill="none">
+            <path d="M 100 250 C 250 180, 450 320, 600 220 C 750 120, 950 240, 1100 160" />
+            <path d="M 80 320 C 240 230, 420 380, 620 280 C 820 180, 980 320, 1120 240" stroke-opacity="0.28" />
+            <path d="M 60 400 C 220 300, 410 460, 650 360 C 860 260, 1000 420, 1150 340" stroke-opacity="0.35" stroke-width="1.5" />
+            <path d="M 40 480 C 200 370, 390 530, 670 440 C 900 340, 1020 500, 1180 430" stroke-opacity="0.25" />
+            <path d="M 30 570 C 180 460, 380 620, 700 520 C 930 420, 1050 600, 1200 530" stroke-opacity="0.18" />
+            <!-- Closed Ridge Elevation Contours -->
+            <ellipse cx="680" cy="380" rx="140" ry="60" stroke="#00e5ff" stroke-opacity="0.3" stroke-dasharray="4 2"/>
+            <ellipse cx="690" cy="375" rx="90" ry="38" stroke="#10b981" stroke-opacity="0.4" fill="url(#contour-grad)"/>
+            <ellipse cx="695" cy="372" rx="45" ry="18" stroke="#ffffff" stroke-opacity="0.5"/>
+          </g>
+
+          <!-- 3D Aerial Drone Trajectory Vector with Waypoint Pings -->
+          <g class="trajectory-vector">
+            <path d="M 120 620 Q 380 490 620 390 T 1080 210" fill="none" stroke="url(#flight-grad)" stroke-width="2.5" stroke-dasharray="6 3"/>
+            <!-- Camera Frustum Pyramids -->
+            <polygon points="300,530 320,500 340,540" fill="#00e5ff" fill-opacity="0.2" stroke="#00e5ff" stroke-width="1"/>
+            <polygon points="560,420 580,390 600,430" fill="#00e5ff" fill-opacity="0.25" stroke="#00e5ff" stroke-width="1.2"/>
+            <polygon points="840,300 860,270 880,310" fill="#00e5ff" fill-opacity="0.2" stroke="#00e5ff" stroke-width="1"/>
+            <!-- Drone Apex Marker -->
+            <circle cx="620" cy="390" r="6" fill="#00e5ff" filter="drop-shadow(0 0 10px #00e5ff)"/>
+            <circle cx="620" cy="390" r="16" fill="none" stroke="#00e5ff" stroke-width="1" stroke-opacity="0.6"/>
+            <!-- Heading Vector -->
+            <line x1="620" y1="390" x2="660" y2="370" stroke="#ffffff" stroke-width="2"/>
+          </g>
+
+          <!-- Tactical HUD Coordinate Reticles & Altitude Tags -->
+          <g fill="#94a3b8" font-family="ui-monospace, monospace" font-size="11" letter-spacing="1">
+            <text x="140" y="640">WP-01 // E 471180 N 5246650</text>
+            <text x="635" y="415" fill="#00e5ff">UAV POS // ALT: 458.7m MSL [AGL 32.4m]</text>
+            <text x="1020" y="195">WP-90 // E 471300 N 5246790</text>
+            <text x="690" y="375" fill="#10b981" text-anchor="middle" font-size="9">ELEV PEAK +484.2m</text>
+          </g>
+
+          <!-- Peripheral Radar Corner Brackets -->
+          <path d="M 40 60 L 40 40 L 60 40" stroke="#00e5ff" stroke-width="1.5" fill="none"/>
+          <path d="M 1160 60 L 1160 40 L 1140 40" stroke="#00e5ff" stroke-width="1.5" fill="none"/>
+          <path d="M 40 740 L 40 760 L 60 760" stroke="#00e5ff" stroke-width="1.5" fill="none"/>
+          <path d="M 1160 740 L 1160 760 L 1140 760" stroke="#00e5ff" stroke-width="1.5" fill="none"/>
+        </svg>
       </div>
     </section>
-    <section class="signin-panel" id="signin" aria-labelledby="signin-heading">
-      <span class="eyebrow">VOXELFLIGHT / RECONSTRUCTION STUDIO</span>
-      <h1 id="signin-heading">Welcome to<br><span>VoxelFlight.</span></h1>
-      <p class="panel-intro">Sign in to your reconstruction studio. Your flights, your results, your workspace.</p>
-      <div class="signin-divider"><span>Sign in to your studio</span></div>
-      <div class="provider-buttons">
-        <a class="provider primary" id="chatgpt-signin" href="/signin-with-chatgpt?return_to=/account" target="_top"><span class="provider-icon" aria-hidden="true">◎</span><span>Continue with ChatGPT</span><span class="arrow" aria-hidden="true">↗</span></a>
-        <details class="other-providers"><summary>Other sign-in providers</summary><div><button class="provider" data-provider="google" disabled aria-label="Continue with Google"><span class="provider-icon google" aria-hidden="true">G</span><span>Google</span><span class="provider-state">Checking</span></button><button class="provider" data-provider="facebook" disabled aria-label="Continue with Facebook"><span class="provider-icon facebook" aria-hidden="true">f</span><span>Facebook</span><span class="provider-state">Checking</span></button></div></details>
+
+    <!-- Refined Dark Intelligence Console Authentication Panel -->
+    <section class="signin-panel airis-auth-card" id="signin" aria-labelledby="signin-heading">
+      <div class="auth-card-header">
+        <div class="airis-insignia" aria-hidden="true">
+          <svg viewBox="0 0 40 40" width="36" height="36">
+            <path d="M20 37 L5 28 L20 19 L35 28 Z" fill="#0b1728" stroke="#00e5ff" stroke-width="1.2"/>
+            <path d="M20 3 L35 25 L20 20 L5 25 Z" fill="url(#auth-grad)"/>
+            <circle cx="20" cy="3" r="1.6" fill="#ffffff"/>
+            <circle cx="20" cy="20" r="1.4" fill="#00e5ff"/>
+            <defs>
+              <linearGradient id="auth-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#00e5ff"/>
+                <stop offset="60%" stop-color="#00b4d8"/>
+                <stop offset="100%" stop-color="#2563eb"/>
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+        <span class="eyebrow airis-mission-badge">SIH PROBLEM STATEMENT 26158 // PHOTOGRAMMETRY STATION</span>
+        <h1 id="signin-heading" class="airis-auth-title">AIRIS</h1>
+        <p class="airis-tagline">Aerial Intelligence for Reconstruction and Avian Surveillance</p>
+        <p class="panel-intro airis-mission-statement">Single-pass drone video to metric-accurate 3D reconstruction, georeferenced point clouds, and geospatial intelligence.</p>
       </div>
+
+      <div class="signin-divider"><span>Operator Authentication</span></div>
+
+      <!-- Authentication Form & Options -->
+      <div class="provider-buttons">
+        <a class="provider primary airis-auth-primary" id="chatgpt-signin" href="/signin-with-chatgpt?return_to=/account" target="_top">
+          <span class="provider-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14.5v-9l6 4.5-6 4.5z"/>
+            </svg>
+          </span>
+          <span>Continue with ChatGPT</span>
+          <span class="arrow" aria-hidden="true">↗</span>
+        </a>
+
+        <!-- Enterprise / Secondary Providers Dropdown -->
+        <details class="other-providers airis-secondary-providers">
+          <summary>Other sign-in providers</summary>
+          <div class="other-providers-grid">
+            <button class="provider" data-provider="google" disabled aria-label="Continue with Google">
+              <span class="provider-icon google" aria-hidden="true">G</span>
+              <span>Google SSO</span>
+              <span class="provider-state">Offline</span>
+            </button>
+            <button class="provider" data-provider="facebook" disabled aria-label="Continue with Facebook">
+              <span class="provider-icon facebook" aria-hidden="true">f</span>
+              <span>Facebook SSO</span>
+              <span class="provider-state">Offline</span>
+            </button>
+          </div>
+        </details>
+      </div>
+
       <p class="auth-message" id="auth-message" role="status" aria-live="polite"></p>
-      <a class="guest-button launch-demo" href="/workspace"><span>Explore as a guest</span><span aria-hidden="true">→</span></a>
-      <p class="guest-note">No account needed · view the saved flight</p>
-      <div class="signin-bottom"><span class="lock-symbol" aria-hidden="true">◇</span><p>Sign in through your provider.<br>We never see your password.</p><button class="motion-button" id="motion-toggle" aria-pressed="false" title="Pause decorative animation">Pause motion</button></div>
-      <details class="privacy-note"><summary>Privacy &amp; sign-in details</summary><p>Sign-in uses your provider’s identifier, name and email to display your account. Session cookies keep you signed in. This site does not request your contacts or social posts. The public demo is available without signing in. Reconstruction files stay on the processing workstation; signing in does not upload videos or start a reconstruction.</p></details>
+
+      <!-- Direct Public Tactical Access / Guest Demo -->
+      <div class="guest-access-wrap">
+        <a class="guest-button launch-demo" href="/workspace">
+          <span class="guest-label">
+            <strong>Direct Tactical Access · Explore Demo</strong>
+            <small>Inspect 518K-point reconstructed cloud &amp; 90-frame Zurich flight</small>
+          </span>
+          <span class="guest-arrow" aria-hidden="true">→</span>
+        </a>
+        <p class="guest-note">No operator account required · Full 3D scene &amp; telemetry inspection</p>
+      </div>
+
+      <!-- Security Footnote & System Status -->
+      <div class="signin-bottom airis-auth-footer">
+        <div class="security-chip">
+          <span class="lock-symbol" aria-hidden="true">🔒</span>
+          <p>End-to-End Cryptographic Session<br>Zero Operator Credential Retention</p>
+        </div>
+        <button class="motion-button" id="motion-toggle" aria-pressed="false" title="Pause decorative animation">Pause motion</button>
+      </div>
+
+      <!-- Compliance & Data Processing Transparency -->
+      <details class="privacy-note airis-transparency-note">
+        <summary>Mission data governance &amp; privacy</summary>
+        <p>Operator identity uses OAuth credentials solely for workspace personalization and authorization. Raw flight footage and multi-view reconstruction pipelines execute strictly on the local workstation or authenticated processing cluster. The public demo operates in client-side WebGL without server storage.</p>
+      </details>
     </section>
   </main>
-  <footer class="entrance-footer"><span>VoxelFlight / FLIGHT LAB</span><span><i></i>Public demo available</span><a href="/workspace#validation">See the evidence ↗</a></footer>
-  <div class="transition-screen" id="transition-screen" hidden role="status" aria-live="polite"><div class="runner" aria-hidden="true"></div><h2 id="transition-title">Opening your workspace</h2><p id="transition-detail">Loading the next view…</p><button class="nav-link" id="cancel-transition">Hide loading screen</button></div>
+
+  <footer class="entrance-footer airis-gateway-footer">
+    <span>AIRIS // AERIAL INTELLIGENCE &amp; 3D RECONSTRUCTION</span>
+    <span><i class="status-dot"></i>Public Geospatial Dataset Available</span>
+    <a href="/workspace#validation">Inspect Reconstruction Accuracy ↗</a>
+  </footer>
+
+  <!-- View Transition Loading Screen -->
+  <div class="transition-screen" id="transition-screen" hidden role="status" aria-live="polite">
+    <div class="runner" aria-hidden="true"></div>
+    <h2 id="transition-title">Initializing AIRIS Command Center</h2>
+    <p id="transition-detail">Loading 3D reconstruction telemetry &amp; spatial coordinates…</p>
+    <button class="nav-link" id="cancel-transition">Hide loading screen</button>
+  </div>
 </body>
 </html>

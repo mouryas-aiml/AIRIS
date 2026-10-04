@@ -36,7 +36,7 @@ export async function prepareFirebase(root,dist){
       html=html.replace('Reconstruction files stay on the processing workstation; signing in does not upload videos or start a reconstruction.','Reconstruction files are stored by the operator-managed processing service and restricted to your account. Signing in does not upload videos or start a reconstruction.');
     }
     if(source==='account.html'){
-      html=html.replace('WELCOME TO YOUR STUDIO','YOUR VOXELFLIGHT ACCOUNT');
+      html=html.replace('WELCOME TO YOUR STUDIO','YOUR AIRIS ACCOUNT');
       html=html.replace('<h1 id="account-name">Your account</h1>','<h1 id="account-name">Welcome.</h1>');
       html=html.replace('New video processing runs on the configured workstation. Local runs are not synced to this account.','Your submitted reconstructions are private to your account. Open the processing workspace to create a run or revisit your results.');
       html=html.replace('id="account-error" role="alert"></p>','id="account-error" role="alert"></p><a class="account-recovery" href="/login">Back to sign-in</a>');
@@ -65,5 +65,5 @@ export async function prepareFirebase(root,dist){
   // current user's authenticated profile. There is no public account-data API.
   await rm(resolve(dist,'_pages'),{recursive:true,force:true});
   await rm(resolve(dist,'entrance.js'),{force:true});
-  await writeFile(resolve(dist,'404.html'),'<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>VoxelFlight — Page not found</title><link rel="stylesheet" href="/entrance.css"></head><body class="entrance"><main class="signin-panel"><span class="eyebrow">VOXELFLIGHT</span><h1>This route is off the flight path.</h1><p>The page was not found. Your workspace is still here.</p><a class="provider primary" href="/workspace">Open the workspace →</a><a class="guest-button" href="/">Return to the entrance</a></main></body></html>');
+  await writeFile(resolve(dist,'404.html'),'<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>AIRIS — Page not found</title><link rel="stylesheet" href="/entrance.css"></head><body class="entrance"><main class="signin-panel"><span class="eyebrow">AIRIS</span><h1>This route is off the flight path.</h1><p>The page was not found. Your workspace is still here.</p><a class="provider primary" href="/workspace">Open the workspace →</a><a class="guest-button" href="/">Return to the entrance</a></main></body></html>');
 }

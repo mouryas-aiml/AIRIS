@@ -63,21 +63,38 @@ for(const [button,dialog] of [['#open-import','#import-dialog'],['#open-input','
   const el=$(button);if(el)el.addEventListener('click',()=>openDialog(dialog));
 }
 
-// Command rail navigation
+// Command rail navigation for 11 AIRIS operations
 all('[data-rail]').forEach(btn=>{
   btn.addEventListener('click',()=>{
     all('[data-rail]').forEach(b=>b.classList.toggle('active',b===btn));
     const target=btn.dataset.rail;
     if(target==='scene'){page('workspace');setMode('geometry');}
+    else if(target==='video'){page('workspace');setMode('video');}
     else if(target==='mission'){openDialog('#inspector-dialog');}
-    else if(target==='ingest'){openDialog('#input-dialog');}
+    else if(target==='ingest'||target==='datasets'){openDialog('#input-dialog');}
     else if(target==='reconstruction'){page('pipeline',{push:true});}
+    else if(target==='map'){
+      const mapCard=$('#hud-map-card');
+      if(mapCard){
+        mapCard.classList.remove('minimized');
+        mapCard.scrollIntoView?.({behavior:'smooth'});
+        toast('2D Georeferenced Flight Map & Footprint');
+      }
+    }
     else if(target==='measure'){
       page('workspace');setMode('geometry');
       if(!viewer?.measuring)$('#measure-button')?.click();
     }
     else if(target==='analysis'){page('validation',{push:true});}
+    else if(target==='surveillance'){
+      $('#vegetation-toggle')?.click();
+      toast('Avian & Aerial Surveillance Mode Active');
+    }
     else if(target==='export'){openDialog('#export-dialog');}
+    else if(target==='settings'){
+      const s=$('#geometry-settings');
+      if(s){s.open=true;s.scrollIntoView?.({behavior:'smooth'});}
+    }
   });
 });
 

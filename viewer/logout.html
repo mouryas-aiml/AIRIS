@@ -1,5 +1,77 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#050918"><title>VoxelFlight — Until next flight</title><meta name="robots" content="noindex"><link rel="icon" href="/favicon.svg"><link rel="stylesheet" href="/entrance.css"><link rel="stylesheet" href="/pixel.css"><link rel="stylesheet" href="/studio.css"><script type="module" src="/entrance.js"></script></head>
-<body class="entrance pixel-entrance" data-page="signed-out"><header class="entrance-nav"><a class="wordmark" href="/"><span class="mark" aria-hidden="true">V<span>F</span></span>Voxel<span>Flight</span><small>RECONSTRUCTION STUDIO</small></a><a class="nav-link" href="/workspace">Explore the demo ↗</a></header>
-<main class="entrance-main"><section class="world"><div class="world-stage" id="world-stage"><img class="world-image" src="/assets/art/pixel-queue-v2.jpg" width="1902" height="827" alt="Decorative pixel-art companions waiting outside the studio"></div></section><section class="signin-panel" aria-labelledby="logout-title"><span class="eyebrow" id="logout-state">CHECKING YOUR SESSION</span><h1 id="logout-title">Until the next flight.</h1><div id="logout-loading" class="account-loading" role="status"><div class="runner" aria-hidden="true"></div></div><p id="logout-message" class="panel-intro">Confirming that your session has ended…</p><p id="logout-error" class="account-error" role="alert"></p><button class="provider primary" id="finish-signout" hidden>Finish signing out</button><a class="provider primary" href="/"><span>Back to the entrance</span><span class="arrow" aria-hidden="true">↗</span></a><a class="guest-button" href="/workspace"><span>Keep exploring as a guest</span><span aria-hidden="true">→</span></a><p class="guest-note">The public demo is always open.</p></section></main>
-<footer class="entrance-footer"><span>VoxelFlight / FLIGHT LAB</span><span>Decorative pixel art · real reconstruction inside</span></footer></body></html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#060a12">
+  <title>AIRIS — Until next flight</title>
+  <meta name="robots" content="noindex">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/entrance.css">
+  <link rel="stylesheet" href="/pixel.css">
+  <link rel="stylesheet" href="/studio.css">
+  <link rel="stylesheet" href="/flight.css">
+  <script type="module" src="/entrance.js"></script>
+</head>
+<body class="entrance airis-gateway" data-page="signed-out">
+  <header class="entrance-nav airis-gateway-nav">
+    <a class="wordmark airis-wordmark" href="/">
+      <span class="mark airis-mark" aria-hidden="true">
+        <svg viewBox="0 0 40 40" width="28" height="28">
+          <path d="M20 37 L5 28 L20 19 L35 28 Z" fill="#0b1728" stroke="#00e5ff" stroke-width="1.2" stroke-opacity="0.6"/>
+          <path d="M20 3 L35 25 L20 20 L5 25 Z" fill="url(#airis-out-grad)"/>
+          <circle cx="20" cy="3" r="1.8" fill="#ffffff"/>
+          <circle cx="20" cy="20" r="1.5" fill="#00e5ff"/>
+          <defs>
+            <linearGradient id="airis-out-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#00e5ff"/>
+              <stop offset="50%" stop-color="#00b4d8"/>
+              <stop offset="100%" stop-color="#2563eb"/>
+            </linearGradient>
+          </defs>
+        </svg>
+      </span>
+      <span class="brand-text">AIRIS</span>
+      <small>MISSION DEBRIEF</small>
+    </a>
+    <a class="nav-link" href="/workspace">Explore the demo <span aria-hidden="true">↗</span></a>
+  </header>
+
+  <main class="entrance-main airis-gateway-main">
+    <section class="world airis-topographic-viewport" aria-label="Geospatial terminal">
+      <div class="world-stage airis-geospatial-canvas-wrap" id="world-stage">
+        <svg class="airis-terrain-mesh" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice" role="img" aria-label="AIRIS procedural topographic aerial contour grid. Decorative illustration, not a reconstruction.">
+          <rect width="100%" height="100%" fill="#070c16"/>
+          <g stroke="#00e5ff" stroke-opacity="0.18" stroke-width="1.2" fill="none">
+            <path d="M 100 300 Q 600 150 1100 350"/>
+            <path d="M 80 450 Q 600 300 1150 500" stroke-opacity="0.25"/>
+            <circle cx="600" cy="400" r="180" stroke-dasharray="3 6" stroke-opacity="0.2"/>
+          </g>
+        </svg>
+      </div>
+    </section>
+
+    <section class="signin-panel airis-auth-card" aria-labelledby="logout-title">
+      <span class="eyebrow airis-mission-badge" id="logout-state">CHECKING YOUR SESSION</span>
+      <h1 id="logout-title" class="airis-auth-title">Until the next flight.</h1>
+      
+      <div id="logout-loading" class="account-loading" role="status">
+        <div class="runner" aria-hidden="true"></div>
+      </div>
+
+      <p id="logout-message" class="panel-intro">Confirming that your session has ended…</p>
+      <p id="logout-error" class="account-error" role="alert"></p>
+
+      <button class="provider primary airis-auth-primary" id="finish-signout" hidden>Finish signing out</button>
+      <a class="provider primary airis-auth-primary" href="/"><span>Back to the entrance</span><span class="arrow" aria-hidden="true">↗</span></a>
+      <a class="guest-button launch-demo" href="/workspace"><span>Keep exploring as a guest</span><span aria-hidden="true">→</span></a>
+      <p class="guest-note">The public photogrammetry demo is always open.</p>
+    </section>
+  </main>
+
+  <footer class="entrance-footer airis-gateway-footer">
+    <span>AIRIS // AERIAL INTELLIGENCE &amp; 3D RECONSTRUCTION</span>
+    <span>Geospatial telemetry logged · session terminated</span>
+  </footer>
+</body>
+</html>

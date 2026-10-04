@@ -2,7 +2,7 @@
 
 ## Public interactive prototype
 
-[Open VoxelFlight](https://voxelflight-3d.web.app/) and choose **Explore as a guest**. Reviewers do not need to sign in to inspect the saved flight.
+[Open AIRIS Command Center](https://voxelflight-3d.web.app/) and choose **Explore as a guest**. Reviewers do not need to sign in to inspect the saved flight.
 
 1. **Watch the flight:** play the real 60-second camera sequence.
 2. **Explore in 3D:** open the actual exported surface, then try the camera and layer controls.

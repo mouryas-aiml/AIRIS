@@ -1,4 +1,4 @@
-/* VoxelFlight / AIRIS: UAV Photogrammetry & 3D Reconstruction Command Center (SIH Problem Statement 26158) */
+/* AIRIS: Aerial Intelligence for Reconstruction and Avian Surveillance — UAV Photogrammetry & 3D Reconstruction Command Center (SIH Problem Statement 26158) */
 :root {
   --cyan-accent: #00e5ff;
   --emerald: #10b981;
@@ -919,26 +919,405 @@
 .flight-studio .engine-progress{background:#152d2a;border:1px solid #548f79;border-top:3px solid #9de2bf}
 .flight-studio .engine-progress>.runner{display:block;margin:0 auto 10px}.flight-studio .engine-progress progress{height:9px}
 
-/* SIGN-IN ENTRANCE */
-.flight-entrance.pixel-entrance{background:radial-gradient(ellipse at 50% 38%,#25204022,transparent 58%),#050918}
-.flight-entrance.pixel-entrance .entrance-nav{border-bottom:1px solid #20263b}
-.flight-entrance.pixel-entrance .entrance-main{padding-top:12px;padding-bottom:34px}
-.flight-entrance.pixel-entrance .world-image{max-height:290px}
-.flight-entrance.pixel-entrance .signin-panel{width:min(480px,100%);margin-top:0}
-.flight-entrance.pixel-entrance .signin-panel>.eyebrow{font-size:12px;color:#b89bd3;margin:8px 0 16px}
-.flight-entrance.pixel-entrance .signin-panel h1{font-size:clamp(26px,3vw,35px);line-height:1.5;letter-spacing:-1.1px;margin-bottom:15px}
-.flight-entrance.pixel-entrance .signin-panel h1>span{color:#b5f1d8}
-.flight-entrance.pixel-entrance .panel-intro{font-size:16px;max-width:420px;line-height:1.7;margin-bottom:24px;color:#acb8cd}
-.flight-entrance.pixel-entrance .launch-demo{background:#b3f2d9;width:100%;min-height:57px;border:1px solid #d6ffed;border-radius:4px;color:#14372d;box-shadow:4px 4px 0 #416957;display:flex;justify-content:space-between;padding:14px 22px;margin:0;font-size:16px;font-weight:600}
-.flight-entrance.pixel-entrance .launch-demo>span:last-child{color:#14372d;font-size:24px}
-.flight-entrance.pixel-entrance .launch-demo:hover{background:#ceffe9;translate:0 -2px}
-.flight-entrance.pixel-entrance .guest-note{font-size:12px;color:#9ba9bd;margin:13px 0 22px}
-.signin-divider{display:flex;align-items:center;gap:14px;font-size:12px;color:#9ba5bc;margin-bottom:20px}
-.signin-divider:before,.signin-divider:after{content:"";height:1px;background:#293247;flex:1}
-.flight-entrance.pixel-entrance .provider.primary{min-height:49px;background:#131d30;color:#dce5f6;border:1px solid #3c4b65;box-shadow:3px 3px 0 #020510;font-size:14px}
-.flight-entrance.pixel-entrance .provider.primary:hover{background:#223345;color:#d7ffee;border-color:#789d90}
-.other-providers{grid-column:1/-1;font-size:13px;color:#9faac1;margin:3px 0 15px}.other-providers summary{width:max-content;max-width:100%;margin:auto;cursor:pointer;line-height:1.8}.other-providers>div{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:15px}
-.flight-entrance.pixel-entrance .provider-state{font-size:12px}.flight-entrance.pixel-entrance .signin-bottom{margin-top:7px}.flight-entrance.pixel-entrance .entrance-footer{font-size:12px}
+/* ==========================================================================
+   AIRIS GEOSPATIAL INTELLIGENCE & COMMAND CENTER DESIGN SYSTEM
+   ========================================================================== */
+
+/* Full-Screen Aerospace Gateway (Login, Account, Logout) */
+.airis-gateway, .flight-entrance.pixel-entrance {
+  min-height: 100svh;
+  background: radial-gradient(circle at 50% 30%, #0d1a2d 0%, #060a12 70%);
+  color: #f1f5f9;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Inter", sans-serif;
+  overflow-x: hidden;
+}
+
+.airis-gateway-nav, .flight-entrance.pixel-entrance .entrance-nav {
+  height: 72px;
+  min-height: 72px;
+  padding: 0 40px;
+  background: rgba(6, 10, 18, 0.85);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(0, 229, 255, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 100;
+}
+
+.airis-wordmark {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+}
+
+.airis-mark, .flight-entrance.pixel-entrance .mark {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  background: rgba(0, 229, 255, 0.08);
+  border: 1px solid rgba(0, 229, 255, 0.3);
+  box-shadow: 0 0 15px rgba(0, 229, 255, 0.15);
+  margin-right: 0;
+  transform: none;
+}
+
+.airis-wordmark .brand-text {
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  color: #ffffff;
+}
+
+.airis-wordmark small {
+  display: block;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  color: #00e5ff;
+  font-family: ui-monospace, monospace;
+}
+
+.gateway-nav-telemetry {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.telemetry-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-family: ui-monospace, monospace;
+  background: rgba(11, 23, 40, 0.7);
+  border: 1px solid rgba(30, 58, 95, 0.8);
+  color: #94a3b8;
+}
+
+.status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #10b981;
+  box-shadow: 0 0 8px #10b981;
+}
+
+.airis-gateway-main, .flight-entrance.pixel-entrance .entrance-main {
+  position: relative;
+  width: 100%;
+  min-height: calc(100svh - 72px - 50px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  z-index: 10;
+  max-width: none;
+}
+
+.airis-topographic-viewport, .flight-entrance.pixel-entrance .world {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 1;
+  max-width: none;
+  margin: 0;
+}
+
+.airis-geospatial-canvas-wrap {
+  width: 100%;
+  height: 100%;
+}
+
+.airis-terrain-mesh {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.85;
+}
+
+.airis-auth-card, .flight-entrance.pixel-entrance .signin-panel {
+  position: relative;
+  z-index: 20;
+  width: min(500px, 92vw);
+  background: rgba(11, 19, 32, 0.92);
+  backdrop-filter: blur(24px);
+  border: 1px solid rgba(0, 229, 255, 0.25);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 30px rgba(0, 229, 255, 0.08);
+  border-radius: 12px;
+  padding: 36px 32px 28px;
+  text-align: center;
+  margin: auto;
+}
+
+.auth-card-header {
+  margin-bottom: 24px;
+}
+
+.airis-insignia {
+  display: inline-flex;
+  margin-bottom: 12px;
+  filter: drop-shadow(0 0 12px rgba(0, 229, 255, 0.4));
+}
+
+.airis-mission-badge, .flight-entrance.pixel-entrance .signin-panel>.eyebrow {
+  display: block;
+  font-size: 10px;
+  font-family: ui-monospace, monospace;
+  letter-spacing: 0.14em;
+  color: #00e5ff;
+  margin-bottom: 8px;
+}
+
+.airis-auth-title, .flight-entrance.pixel-entrance .signin-panel h1 {
+  font-size: 38px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: #ffffff;
+  margin: 0 0 6px;
+  line-height: 1.1;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Inter", sans-serif;
+}
+
+.airis-tagline {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: #94a3b8;
+  margin: 0 0 14px;
+}
+
+.airis-mission-statement, .flight-entrance.pixel-entrance .panel-intro {
+  font-size: 12px;
+  line-height: 1.6;
+  color: #cbd5e1;
+  max-width: 380px;
+  margin: 0 auto;
+}
+
+.signin-divider {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-size: 11px;
+  color: #64748b;
+  margin: 20px 0 16px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-family: ui-monospace, monospace;
+}
+
+.signin-divider:before, .signin-divider:after {
+  content: "";
+  height: 1px;
+  background: rgba(30, 41, 59, 0.8);
+  flex: 1;
+}
+
+.airis-auth-primary, .flight-entrance.pixel-entrance .provider.primary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  height: 48px;
+  background: linear-gradient(135deg, #00b4d8 0%, #0077b6 100%);
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: 0.02em;
+  border: 1px solid rgba(0, 229, 255, 0.4);
+  border-radius: 6px;
+  box-shadow: 0 4px 16px rgba(0, 180, 216, 0.25);
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.airis-auth-primary:hover, .flight-entrance.pixel-entrance .provider.primary:hover {
+  background: linear-gradient(135deg, #00e5ff 0%, #0096c7 100%);
+  box-shadow: 0 4px 22px rgba(0, 229, 255, 0.4);
+  transform: translateY(-1px);
+}
+
+.other-providers {
+  font-size: 12px;
+  color: #94a3b8;
+  margin: 12px 0 6px;
+}
+
+.other-providers summary {
+  cursor: pointer;
+  color: #94a3b8;
+  padding: 4px 8px;
+}
+
+.other-providers-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.other-providers .provider {
+  min-height: 40px;
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid rgba(30, 41, 59, 0.8);
+  border-radius: 4px;
+  font-size: 12px;
+}
+
+.guest-access-wrap {
+  margin: 20px 0 16px;
+}
+
+.airis-guest-action, .flight-entrance.pixel-entrance .launch-demo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 18px;
+  background: rgba(16, 185, 129, 0.1);
+  border: 1px solid rgba(16, 185, 129, 0.35);
+  border-radius: 6px;
+  color: #e2e8f0;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  text-align: left;
+  box-shadow: 0 4px 16px rgba(16, 185, 129, 0.1);
+}
+
+.airis-guest-action:hover, .flight-entrance.pixel-entrance .launch-demo:hover {
+  background: rgba(16, 185, 129, 0.18);
+  border-color: rgba(16, 185, 129, 0.6);
+  transform: translateY(-1px);
+}
+
+.guest-label strong {
+  display: block;
+  font-size: 13px;
+  color: #34d399;
+}
+
+.guest-label small {
+  font-size: 11px;
+  color: #94a3b8;
+}
+
+.guest-arrow, .flight-entrance.pixel-entrance .launch-demo>span:last-child {
+  font-size: 18px;
+  color: #34d399;
+}
+
+.guest-note, .flight-entrance.pixel-entrance .guest-note {
+  font-size: 11px;
+  color: #64748b;
+  margin: 6px 0 16px;
+  font-family: ui-monospace, monospace;
+}
+
+.airis-auth-footer, .flight-entrance.pixel-entrance .signin-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 16px;
+  border-top: 1px solid rgba(30, 41, 59, 0.8);
+  margin-top: 16px;
+}
+
+.security-chip {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-align: left;
+}
+
+.security-chip p {
+  margin: 0;
+  font-size: 10px;
+  line-height: 1.4;
+  color: #64748b;
+  font-family: ui-monospace, monospace;
+}
+
+.airis-transparency-note {
+  margin-top: 14px;
+  font-size: 11px;
+  color: #64748b;
+  text-align: left;
+}
+
+.airis-transparency-note summary {
+  cursor: pointer;
+  color: #94a3b8;
+  font-size: 11px;
+}
+
+.airis-transparency-note p {
+  margin-top: 8px;
+  padding: 10px;
+  background: rgba(7, 12, 20, 0.6);
+  border-radius: 4px;
+  border: 1px solid rgba(30, 41, 59, 0.6);
+  line-height: 1.5;
+}
+
+.airis-gateway-footer, .flight-entrance.pixel-entrance .entrance-footer {
+  height: 50px;
+  padding: 0 40px;
+  background: rgba(6, 10, 18, 0.9);
+  border-top: 1px solid rgba(30, 41, 59, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 11px;
+  color: #64748b;
+  font-family: ui-monospace, monospace;
+}
+
+.airis-gateway-footer a {
+  color: #00e5ff;
+  text-decoration: none;
+}
+
+/* Status Cards & Micro Elements */
+.airis-mission-status-card {
+  padding: 12px 14px;
+  background: rgba(11, 23, 40, 0.6);
+  border: 1px solid rgba(0, 229, 255, 0.2);
+  border-radius: 6px;
+  margin-bottom: 12px;
+}
+
+.airis-mission-status-card .mission-tag {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 10px;
+  font-family: ui-monospace, monospace;
+  color: #00e5ff;
+  letter-spacing: 0.1em;
+  margin-bottom: 4px;
+}
+
+.airis-mission-status-card p {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.5;
+  color: #cbd5e1;
+}
+
+.airis-mission-status-card strong {
+  display: block;
+  color: #ffffff;
+  font-size: 11px;
+  letter-spacing: 0.04em;
+}
 
 /* RESPONSIVE & REDUCED MOTION RULES (REQUIRED BY TESTS) */
 @media(max-width:1050px){

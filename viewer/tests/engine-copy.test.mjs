@@ -10,7 +10,7 @@ test('customer-facing labels describe reconstruction rather than development har
     assert.doesNotMatch(visible,/\b(?:Mac|Apple|MPS)\b/i,file);
   }
   const html=await read('engine.html');
-  assert.match(html,/<title>VoxelFlight — New reconstruction<\/title>/);
+  assert.match(html,/<title>AIRIS — New reconstruction<\/title>/);
   assert.match(html,/>Start reconstruction<\/button>/);
   assert.match(html,/>Recent runs /);
 });

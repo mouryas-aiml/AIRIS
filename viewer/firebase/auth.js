@@ -15,11 +15,11 @@ const output=$('#auth-message')||$('#account-error')||$('#logout-error');
 function message(text){if(output)output.textContent=text;}
 function setBusy(value){busy=value;document.querySelectorAll('[data-firebase-provider]').forEach(button=>{button.disabled=value||!ready||!settings?.providers?.includes(button.dataset.firebaseProvider);});const fallback=$('#redirect-signin');if(fallback)fallback.disabled=value||!ready;}
 function renderUser(user){
-  resolveInitial(user);window.dispatchEvent(new CustomEvent('voxelflight:authchange',{detail:{signedIn:!!user}}));
+  resolveInitial(user);window.dispatchEvent(new CustomEvent('airis:authchange',{detail:{signedIn:!!user}}));window.dispatchEvent(new CustomEvent('voxelflight:authchange',{detail:{signedIn:!!user}}));
   const profile=displayProfile(user);
   document.querySelectorAll('[data-account-link]').forEach(link=>{
     link.textContent=profile?`Hi, ${profile.name.split(/\s+/)[0]}`:'Sign in';
-    link.title=profile?`Welcome, ${profile.name}`:'Sign in to VoxelFlight';
+    link.title=profile?`Welcome, ${profile.name}`:'Sign in to AIRIS';
     link.href=profile?'/account':`/login?return_to=${encodeURIComponent(safeReturnTo(location.pathname+location.hash,location.origin))}`;
   });
   if(page==='signin'){
@@ -40,7 +40,7 @@ function renderUser(user){
     $('#logout-loading').hidden=true;$('#finish-signout').hidden=!profile;
     $('#logout-state').textContent=profile?'SESSION STILL ACTIVE':'SESSION CLOSED';
     $('#logout-title').textContent=profile?'One more step.':'See you next flight.';
-    $('#logout-message').textContent=profile?'Your session is still active. Use the button below to sign out.':'You’re signed out of VoxelFlight. Saved public reconstructions are still available.';
+    $('#logout-message').textContent=profile?'Your session is still active. Use the button below to sign out.':'You’re signed out of AIRIS. Saved public reconstructions are still available.';
   }
 }
 function providerFor(id){
@@ -62,7 +62,7 @@ async function signin(id,redirect=false){
 }
 async function logout(){
   if(!auth||busy)return;
-  setBusy(true);message('');showTransition('Until the next flight','Signing you out of VoxelFlight…');
+  setBusy(true);message('');showTransition('Until the next flight','Signing you out of AIRIS…');
   try{await signOut(auth);location.replace('/logout');}
   catch(error){hideTransition();message(authMessage(error));setBusy(false);}
 }

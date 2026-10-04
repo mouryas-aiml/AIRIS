@@ -1,1 +1,32 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="VoxelFlight"><rect x="2" y="2" width="60" height="60" rx="3" fill="#10192b" stroke="#b9a1ee" stroke-width="2"/><path d="M12 17h7v15h5v10h4V32h5V17h7v22h-6v9H18v-9h-6Z" fill="#9bf3d4"/><path d="M45 17h12v6h-6v5h6v6h-6v14h-6Z" fill="#c4a2ff"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="AIRIS">
+  <defs>
+    <linearGradient id="fav-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#080e1a"/>
+      <stop offset="100%" stop-color="#04070d"/>
+    </linearGradient>
+    <linearGradient id="fav-wing" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00e5ff"/>
+      <stop offset="50%" stop-color="#00b4d8"/>
+      <stop offset="100%" stop-color="#2563eb"/>
+    </linearGradient>
+  </defs>
+  <!-- Stealth Hexagonal/Beveled Shield Canvas -->
+  <rect x="2" y="2" width="60" height="60" rx="12" fill="url(#fav-bg)" stroke="#1e2f4d" stroke-width="2"/>
+  
+  <!-- 3D Isometric Terrain Grid Floor -->
+  <path d="M32 58 L8 44 L32 30 L56 44 Z" fill="#0c1726" stroke="#00e5ff" stroke-width="1.2" stroke-opacity="0.4"/>
+  <path d="M32 58 L32 30" stroke="#00b4d8" stroke-width="1" stroke-opacity="0.5" stroke-dasharray="2 2"/>
+  <path d="M20 51 L44 37" stroke="#00b4d8" stroke-width="1" stroke-opacity="0.3" stroke-dasharray="2 2"/>
+  <path d="M44 51 L20 37" stroke="#00b4d8" stroke-width="1" stroke-opacity="0.3" stroke-dasharray="2 2"/>
+
+  <!-- High-Tech Avian / UAV Delta Wing Geometry -->
+  <path d="M32 6 L56 38 L32 30 L8 38 Z" fill="url(#fav-wing)"/>
+  
+  <!-- Facet Depth Shading -->
+  <path d="M32 6 L32 30 L44 34 Z" fill="#ffffff" fill-opacity="0.25"/>
+  <path d="M32 6 L32 30 L20 34 Z" fill="#000000" fill-opacity="0.22"/>
+  
+  <!-- Sensor Pod / Optical Center -->
+  <circle cx="32" cy="6" r="2.5" fill="#ffffff"/>
+  <circle cx="32" cy="30" r="2" fill="#00e5ff"/>
+</svg>

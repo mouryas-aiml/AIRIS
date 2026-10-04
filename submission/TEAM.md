@@ -1,6 +1,6 @@
 # Team registration
 
-**Registration details still need the team's confirmation before submitting the form.** VoxelFlight is the product name, not an assumed registered team name.
+**Registration details still need the team's confirmation before submitting the form.** AIRIS is the product name, not an assumed registered team name.
 
 - Registered team name: awaiting confirmation
 - Registered team ID: awaiting confirmation
