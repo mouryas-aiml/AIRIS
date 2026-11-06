@@ -10,7 +10,7 @@
 
 ---
 
-> **[🌐 Live Command Center](https://voxelflight-3d.web.app/)** — open immediately, no sign-in needed.
+> **[🌐 Live Command Center](https://airis-3d.vercel.app/)** — open immediately, no sign-in needed.
 > Choose **Explore as a guest** to view the saved 90-view source-textured reconstruction, the original 60-second flight video, trajectory overlay, and all downloadable assets.
 
 ---
