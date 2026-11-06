@@ -3,7 +3,7 @@
 **Single-Pass Drone Video → Accurate 3D Georeferenced Model** · Smart India Hackathon 2026 · Problem Statement **SIH26158**
 
 [![Frontend CI](https://img.shields.io/badge/CI-GitHub_Actions-brightgreen?logo=github-actions)](https://github.com/mouryas-aiml/AIRIS/actions)
-[![Live Demo](https://img.shields.io/badge/Live_Demo-Firebase_Hosted-orange?logo=firebase)](https://voxelflight-3d.web.app/)
+[![Live Demo](https://img.shields.io/badge/Live_Demo-Firebase_Hosted-orange?logo=firebase)](https://airis-3d.vercel.app/)
 [![Node 24](https://img.shields.io/badge/Node-24-green?logo=node.js)](https://nodejs.org)
 [![Python 3.12](https://img.shields.io/badge/Python-3.12-blue?logo=python)](https://python.org)
 [![License](https://img.shields.io/badge/License-SIH_2026-lightgrey)](LICENSE)
